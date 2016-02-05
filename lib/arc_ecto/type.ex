@@ -3,7 +3,7 @@ defmodule Arc.Ecto.Type do
 
   def cast(definition, args) do
     case definition.store(args) do
-      {:ok, file} -> {:ok, %{file_name: file, updated_at: Ecto.DateTime.utc, identifier: UUID.uuid1()}}
+      {:ok, file} -> {:ok, %{file_name: file, updated_at: Ecto.DateTime.utc}}
       _ -> :error
     end
   end
@@ -11,14 +11,17 @@ defmodule Arc.Ecto.Type do
   def cast(definition, _other), do: :error
 
   def load(definition, value) do
-    [file_parts, gsec] = String.split(value, "?")
-    [file_name,file_identifier] = String.split(file_parts, "|")
+    [file_meta, gsec] = String.split(value, "?")
+    [file_name, identifier] = String.split(file_meta, "|")
     updated_at = Ecto.DateTime.from_erl(:calendar.gregorian_seconds_to_datetime(String.to_integer(gsec)))
-    {:ok, %{file_name: file_name, updated_at: updated_at, file_identifier: file_identifier}}
+    {:ok, %{file_name: file_name, updated_at: updated_at, identifier: identifier}}
   end
 
-  def dump(definition, %{file_name: file_name, updated_at: updated_at, identifier: identifier}) do
+  def dump(definition, %{file_name: file_name, updated_at: updated_at}) do
     gsec = :calendar.datetime_to_gregorian_seconds(Ecto.DateTime.to_erl(updated_at))
-    {:ok, "#{file_name}|#{identifier}?#{gsec}"}
+    val = "#{file_name.file_name}|#{file_name.identifier}?#{gsec}"
+    IO.puts val
+
+    {:ok, val}
   end
 end
