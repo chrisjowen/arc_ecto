@@ -47,6 +47,7 @@ defmodule Arc.Ecto.Mixfile do
     [
       {:arc, "~> 0.2.0"},
       {:ecto, ">= 0.10.0"},
+      {:uuid, "~> 1.1" },
       {:mock, "~> 0.1.1", only: :test}
     ]
   end

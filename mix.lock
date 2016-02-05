@@ -7,4 +7,5 @@
   "meck": {:hex, :meck, "0.8.3"},
   "mock": {:hex, :mock, "0.1.1"},
   "mogrify": {:hex, :mogrify, "0.1.0"},
-  "poolboy": {:hex, :poolboy, "1.5.1"}}
+  "poolboy": {:hex, :poolboy, "1.5.1"},
+  "uuid": {:hex, :uuid, "1.1.3"}}
