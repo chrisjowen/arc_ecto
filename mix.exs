@@ -46,6 +46,7 @@ defmodule Arc.Ecto.Mixfile do
   defp deps do
     [
       {:arc,  github: "chrisjowen/arc" },
+      #{:arc,  path: "../arc" },
       {:ecto, ">= 0.10.0"},
       {:mock, "~> 0.1.1", only: :test}
     ]
